@@ -22,14 +22,16 @@ class CustomPluggable implements PluggableWithAnywhereDoor {
   }
 
   @override
-  String get displayName => 'ToDetail';
+  ImageProvider<Object> get iconImageProvider => MemoryImage(base64Decode(icon.iconData));
 
   @override
-  ImageProvider<Object> get iconImageProvider => MemoryImage(base64Decode(icon.iconData));
+  int get index => 999;
 
   @override
   String get name => 'ToDetail';
 
+  @override
+  String get displayName => 'ToDetail';
   @override
   NavigatorState? get navigator => navKey?.currentState;
 

@@ -22,6 +22,10 @@ class CpuInfoPage extends StatefulWidget implements Pluggable {
   @override
   Widget buildWidget(BuildContext? context) => this;
 
+
+  @override
+  int get index => 2;
+
   @override
   String get name => 'CPU信息';
 

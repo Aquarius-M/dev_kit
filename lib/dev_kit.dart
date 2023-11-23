@@ -71,9 +71,9 @@ class _DevKitState extends State<DevKit> {
 
   @override
   void initState() {
-    PluginManager.instance
-      ..registerAll(widget.pluginsList ?? [])
-      ..registerAll(commonPluginsList);
+    PluginManager.instance.registerAll(widget.pluginsList ?? []).then((value) {
+      PluginManager.instance.registerAll(commonPluginsList);
+    });
     super.initState();
     _replaceChild();
     _injectOverlay();

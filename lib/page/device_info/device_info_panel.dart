@@ -19,6 +19,10 @@ class DeviceInfoPanel extends StatefulWidget implements Pluggable {
   @override
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
+
+  @override
+  int get index => 3;
+
   @override
   String get name => '设备信息';
 

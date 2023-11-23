@@ -18,7 +18,7 @@ class PluginManager {
   PluginManager._();
 
   /// Register a single [plugin]
-  void register(Pluggable plugin) {
+  Future register(Pluggable plugin) async {
     if (plugin.name.isEmpty) {
       return;
     }
@@ -26,7 +26,7 @@ class PluginManager {
   }
 
   /// Register multiple [plugins]
-  void registerAll(List<Pluggable> plugins) {
+  Future registerAll(List<Pluggable> plugins) async {
     for (final plugin in plugins) {
       register(plugin);
     }

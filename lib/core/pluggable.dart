@@ -4,6 +4,7 @@ import 'package:tuple/tuple.dart';
 abstract class Pluggable {
   String get name;
   String get displayName;
+  int get index;
   void onTrigger();
   Widget? buildWidget(BuildContext? context);
   ImageProvider get iconImageProvider;
