@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
@@ -25,10 +27,10 @@ class ColorSucker extends StatefulWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  String get name => 'ColorSucker';
+  String get name => '取色器';
 
   @override
-  String get displayName => 'ColorSucker';
+  String get displayName => '取色器';
 
   @override
   void onTrigger() {}

@@ -20,10 +20,10 @@ class DeviceInfoPanel extends StatefulWidget implements Pluggable {
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
-  String get name => 'DeviceInfo';
+  String get name => '设备信息';
 
   @override
-  String get displayName => 'DeviceInfo';
+  String get displayName => '设备信息';
 
   @override
   void onTrigger() {}
@@ -124,7 +124,7 @@ class _DeviceInfoPanelState extends State<DeviceInfoPanel> {
           Container(
               padding: const EdgeInsets.only(bottom: 8),
               child: const Text(
-                'Device Info',
+                '设备信息',
                 textScaler: TextScaler.linear(1.15),
                 style: TextStyle(
                   fontSize: 20,

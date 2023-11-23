@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'dart:math';
 import 'package:dev_kit/core/pluggable.dart';
@@ -28,10 +30,10 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
-  String get name => 'WidgetDetail';
+  String get name => '组件详情';
 
   @override
-  String get displayName => 'WidgetDetail';
+  String get displayName => '组件详情';
 
   @override
   void onTrigger() {}

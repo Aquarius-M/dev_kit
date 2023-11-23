@@ -21,10 +21,10 @@ class MemoryInfoPage extends StatelessWidget implements Pluggable {
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
-  String get name => 'MemoryInfo';
+  String get name => '内存信息';
 
   @override
-  String get displayName => 'MemoryInfo';
+  String get displayName => '内存信息';
 
   @override
   void onTrigger() {}

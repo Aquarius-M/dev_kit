@@ -20,10 +20,10 @@ class AlignRuler extends StatefulWidget implements Pluggable {
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
-  String get name => 'AlignRuler';
+  String get name => '标尺';
 
   @override
-  String get displayName => 'AlignRuler';
+  String get displayName => '标尺';
 
   @override
   void onTrigger() {}

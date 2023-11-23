@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../core/inspector_overlay.dart';
 import '../../core/pluggable.dart';
@@ -19,10 +21,10 @@ class WidgetInfoInspector extends StatefulWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  String get name => 'WidgetInfo';
+  String get name => '组件信息';
 
   @override
-  String get displayName => 'WidgetInfo';
+  String get displayName => '组件信息';
 
   @override
   void onTrigger() {}

@@ -10,10 +10,10 @@ class TouchIndicator extends StatelessWidget implements PluggableWithNestedWidge
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  String get name => 'TouchIndicator';
+  String get name => '触摸指示器';
 
   @override
-  String get displayName => 'TouchIndicator';
+  String get displayName => '触摸指示器';
 
   @override
   void onTrigger() {}
