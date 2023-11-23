@@ -16,7 +16,7 @@ class ColorSucker extends StatefulWidget implements Pluggable {
   const ColorSucker({
     Key? key,
     this.scale = 10.0,
-    this.size = const Size(100, 100),
+    this.size = const Size(50, 50),
   }) : super(key: key);
 
   @override
@@ -204,7 +204,13 @@ class _ColorSuckerState extends State<ColorSucker> {
                 child: Container(
                   height: _magnifierSize.height,
                   width: _magnifierSize.width,
-                  decoration: BoxDecoration(borderRadius: _radius!, border: Border.all(color: Colors.grey, width: 3)),
+                  decoration: BoxDecoration(
+                    borderRadius: _radius!,
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                  ),
                   child: Center(
                     child: Container(
                       height: 1,
