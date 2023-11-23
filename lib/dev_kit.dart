@@ -1,56 +1,177 @@
-import 'package:dev_kit/widget/devkit_btn.dart';
-import 'package:flutter/foundation.dart';
+// ignore_for_file: deprecated_member_use
+
+import 'package:dev_kit/page/cpu_info/cpu_info_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart' as dart;
 
-import 'engine/devkit_binding.dart';
-import 'ui/devkit_app.dart';
+import 'core/pluggable_message_service.dart';
+import 'core/global.dart';
+import 'core/pluggable.dart';
+import 'core/plugin_manager.dart';
+import 'page/align_ruler/align_ruler.dart';
+import 'page/color_sucker/color_sucker.dart';
+import 'page/device_info/device_info_panel.dart';
+import 'page/memory_info/memory_info_page.dart';
+import 'page/touch_indicator/touch_indicator.dart';
+import 'page/widget_detail_inspector/widget_detail_inspector.dart';
+import 'page/widget_info_inspector/widget_info_inspector.dart';
+import 'ui/devkit_content.dart';
+import 'utils/binding_ambiguate.dart';
 
-const bool release = kReleaseMode;
+final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
 
-class DevKit {
-  static Future<void> runApp({
-    DevKitApp? app,
-    bool useRunZoned = true,
-    bool useInRelease = false,
-    Function? releaseAction,
-  }) async {
-    if (release && !useInRelease) {
-      if (releaseAction != null) {
-        releaseAction.call();
-      } else {
-        dart.runApp(app!);
+class DevKit extends StatefulWidget {
+  final Widget child;
+  final bool enable;
+  final List<Pluggable>? pluginsList;
+  const DevKit({
+    Key? key,
+    this.pluginsList,
+    required this.child,
+    this.enable = true,
+  }) : super(key: key);
+
+  @override
+  State<DevKit> createState() => _DevKitState();
+}
+
+/// Hold the [_UMEWidgetState] as a global variable.
+_DevKitState? _devKitState;
+
+class _DevKitState extends State<DevKit> {
+  _DevKitState() {
+    // Make sure only a single `DevKit` is being used.
+    assert(
+      _devKitState == null,
+      'Only one `DevKit` can be used at the same time.',
+    );
+    if (_devKitState != null) {
+      throw StateError('Only one `DevKit` can be used at the same time.');
+    }
+    _devKitState = this;
+  }
+
+  late Widget _child;
+  VoidCallback? _onMetricsChanged;
+
+  bool _overlayEntryInserted = false;
+  OverlayEntry _overlayEntry = OverlayEntry(
+    builder: (_) => const SizedBox.shrink(),
+  );
+
+  List<Pluggable> commonPluginsList = [
+    const WidgetInfoInspector(),
+    const WidgetDetailInspector(),
+    const ColorSucker(),
+    const AlignRuler(),
+    const TouchIndicator(),
+    const MemoryInfoPage(),
+    const CpuInfoPage(),
+    const DeviceInfoPanel(),
+  ];
+
+  @override
+  void initState() {
+    PluginManager.instance
+      ..registerAll(widget.pluginsList ?? [])
+      ..registerAll(commonPluginsList);
+    super.initState();
+    _replaceChild();
+    _injectOverlay();
+    _onMetricsChanged = bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged;
+    bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = () {
+      if (_onMetricsChanged != null) {
+        _onMetricsChanged!();
+        _replaceChild();
+        setState(() {});
       }
-      return;
+    };
+  }
+
+  @override
+  void didUpdateWidget(DevKit oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget.enable ? PluggableMessageService().resetListener() : PluggableMessageService().clearListener();
+    if (widget.enable != oldWidget.enable && widget.enable) {
+      _injectOverlay();
     }
-    if (useRunZoned != true) {
-      f() async => <void>{
-            _runWrapperApp(app!),
-            _ensureDoKitBinding(useInRelease: useInRelease),
-          };
-      await f();
-      return;
+    if (widget.child != oldWidget.child) {
+      _replaceChild();
+    }
+    if (!widget.enable) {
+      _removeOverlay();
     }
   }
-}
 
-void _runWrapperApp(DevKitApp wrapper) {
-  DevKitWidgetsFlutterBinding.ensureInitialized()
-    // ignore: invalid_use_of_protected_member
-    ?..scheduleAttachRootWidget(wrapper)
-    ..scheduleWarmUpFrame();
-  addEntrance();
-}
-
-void addEntrance() {
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    final DevKitBtn floatBtn = DevKitBtn();
-    floatBtn.addToOverlay();
-  });
-}
-
-void _ensureDoKitBinding({bool useInRelease = false}) {
-  if (!release || useInRelease) {
-    DevKitWidgetsFlutterBinding.ensureInitialized();
+  @override
+  void dispose() {
+    if (_onMetricsChanged != null) {
+      bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = _onMetricsChanged;
+    }
+    super.dispose();
+    // Do the cleaning at last.
+    _devKitState = null;
   }
+
+  void _removeOverlay() {
+    // Call `remove` only when the entry has been inserted.
+    if (_overlayEntryInserted) {
+      _overlayEntry.remove();
+      _overlayEntryInserted = false;
+    }
+  }
+
+  void _replaceChild() {
+    final nestedWidgets = PluginManager.instance.pluginsMap.values.where((value) {
+      return value != null && value is PluggableWithNestedWidget;
+    }).toList();
+    Widget layoutChild = _buildLayout(widget.child);
+    for (var item in nestedWidgets) {
+      if (item!.name != PluginManager.instance.activatedPluggableName) {
+        continue;
+      }
+      if (item is PluggableWithNestedWidget) {
+        layoutChild = item.buildNestedWidget(layoutChild);
+        break;
+      }
+    }
+    _child = Directionality(textDirection: TextDirection.ltr, child: layoutChild);
+  }
+
+  void _injectOverlay() {
+    bindingAmbiguate(WidgetsBinding.instance)?.addPostFrameCallback((_) {
+      if (_overlayEntryInserted) {
+        return;
+      }
+      if (widget.enable) {
+        _overlayEntry = OverlayEntry(
+          builder: (_) => Material(
+            type: MaterialType.transparency,
+            child: ContentPage(
+              refreshChildLayout: () {
+                _replaceChild();
+                setState(() {});
+              },
+            ),
+          ),
+        );
+        overlayKey.currentState?.insert(_overlayEntry);
+        _overlayEntryInserted = true;
+      }
+    });
+  }
+
+  Stack _buildLayout(Widget child) {
+    return Stack(
+      children: <Widget>[
+        RepaintBoundary(key: rootKey, child: child),
+        MediaQuery(
+          data: MediaQueryData.fromView(bindingAmbiguate(WidgetsBinding.instance)!.platformDispatcher.implicitView!),
+          child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => _child;
 }

@@ -1,15 +1,26 @@
 name: dev_kit
 description: "开发人员工具集"
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
   flutter: '>=3.3.0'
 
+
 dependencies:
   flutter:
     sdk: flutter
+  tuple:
+  base_utils:
+    path: ../base_utils
+  shared_preferences:
+  image:
+  touch_indicator:
+  vm_service:
+  platform:
+  system_info:
+  device_info:
 
 dev_dependencies:
   flutter_test:
