@@ -206,6 +206,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
         }
       }
     }
+    dataList.sort((a, b) => b!.index.compareTo(a!.index));
     _saveData(dataList);
     setState(() {
       _dataList = dataList;

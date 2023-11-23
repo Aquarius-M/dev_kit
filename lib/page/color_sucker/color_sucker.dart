@@ -27,7 +27,7 @@ class ColorSucker extends StatefulWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  int get index => 1;
+  int get index => 2;
 
   @override
   String get name => '取色器';

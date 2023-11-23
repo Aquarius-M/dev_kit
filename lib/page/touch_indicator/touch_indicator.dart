@@ -11,7 +11,7 @@ class TouchIndicator extends StatelessWidget implements PluggableWithNestedWidge
 
 
   @override
-  int get index => 5;
+  int get index => 0;
 
   @override
   String get name => '触摸指示器';

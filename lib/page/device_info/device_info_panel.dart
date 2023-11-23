@@ -21,7 +21,7 @@ class DeviceInfoPanel extends StatefulWidget implements Pluggable {
 
 
   @override
-  int get index => 3;
+  int get index => 5;
 
   @override
   String get name => '设备信息';
