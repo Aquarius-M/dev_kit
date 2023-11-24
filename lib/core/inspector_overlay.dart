@@ -10,7 +10,7 @@ import 'dart:math' as math;
 import '../utils/constants.dart';
 
 class InspectorOverlay extends LeafRenderObjectWidget {
-  const InspectorOverlay({Key? key, required this.selection, this.needEdges = true, this.needDescription = true}) : super(key: key);
+  const InspectorOverlay({super.key, required this.selection, this.needEdges = true, this.needDescription = true});
 
   final InspectorSelection selection;
 

@@ -29,7 +29,7 @@ class SearchBar extends StatefulWidget {
   final OnFocusChangeHandle? onFocusChangeHandle;
 
   const SearchBar({
-    Key? key,
+    super.key,
     this.placeHolder = '请输入要搜索的内容',
     this.autofocus = false,
     this.enabled = true,
@@ -44,7 +44,7 @@ class SearchBar extends StatefulWidget {
     this.onSubmitHandle,
     this.onFocusChangeHandle,
     this.inputCharactersLength = 100,
-  }) : super(key: key);
+  });
 
   @override
   // ignore: library_private_types_in_public_api

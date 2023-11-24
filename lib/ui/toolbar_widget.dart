@@ -14,7 +14,7 @@ import '../core/store_manager.dart';
 import '../utils/constants.dart';
 
 class ToolBarWidget extends StatefulWidget {
-  const ToolBarWidget({Key? key, this.action, this.maximalAction, this.closeAction}) : super(key: key);
+  const ToolBarWidget({super.key, this.action, this.maximalAction, this.closeAction});
 
   final MenuAction? action;
   final CloseAction? closeAction;
@@ -63,12 +63,11 @@ class _ToolBarWidgetState extends State<ToolBarWidget> {
 
 class _ToolBarContent extends StatefulWidget {
   const _ToolBarContent({
-    Key? key,
     this.action,
     this.dragCallback,
     this.maximalAction,
     this.closeAction,
-  }) : super(key: key);
+  });
 
   final MenuAction? action;
   final Function? dragCallback;
@@ -225,7 +224,7 @@ class __ToolBarContentState extends State<_ToolBarContent> {
 }
 
 class _PluginScrollContainer extends StatelessWidget {
-  const _PluginScrollContainer({Key? key, required this.dataList, this.action}) : super(key: key);
+  const _PluginScrollContainer({required this.dataList, this.action});
 
   final List<Pluggable?> dataList;
   final MenuAction? action;
@@ -251,7 +250,7 @@ class _PluginScrollContainer extends StatelessWidget {
 }
 
 class _MenuCell extends StatelessWidget {
-  const _MenuCell({Key? key, this.pluginData, this.action}) : super(key: key);
+  const _MenuCell({this.pluginData, this.action});
 
   final Pluggable? pluginData;
   final MenuAction? action;

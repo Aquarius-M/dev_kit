@@ -13,7 +13,7 @@ import 'search_bar.dart' as search_bar;
 import 'icon.dart' as icon;
 
 class WidgetDetailInspector extends StatelessWidget implements Pluggable {
-  const WidgetDetailInspector({Key? key}) : super(key: key);
+  const WidgetDetailInspector({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,6 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   @override
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
-
   @override
   int get index => 6;
 
@@ -44,7 +43,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
 }
 
 class _DetailPage extends StatefulWidget {
-  const _DetailPage({Key? key}) : super(key: key);
+  const _DetailPage();
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -116,7 +115,7 @@ class _DetailModel {
 }
 
 class _InfoPage extends StatefulWidget {
-  const _InfoPage({Key? key, required this.elements}) : super(key: key);
+  const _InfoPage({required this.elements});
 
   final List<Element> elements;
 
@@ -238,7 +237,7 @@ class __InfoPageState extends State<_InfoPage> {
 }
 
 class _DetailContent extends StatelessWidget {
-  const _DetailContent({Key? key, required this.element}) : super(key: key);
+  const _DetailContent({required this.element});
 
   final Element element;
 

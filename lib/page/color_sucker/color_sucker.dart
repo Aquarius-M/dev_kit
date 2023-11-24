@@ -14,10 +14,10 @@ class ColorSucker extends StatefulWidget implements Pluggable {
   final Size size;
 
   const ColorSucker({
-    Key? key,
+    super.key,
     this.scale = 10.0,
     this.size = const Size(50, 50),
-  }) : super(key: key);
+  });
 
   @override
   // ignore: library_private_types_in_public_api

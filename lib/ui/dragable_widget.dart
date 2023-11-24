@@ -17,14 +17,14 @@ class DragableGridView<T> extends StatefulWidget {
 
   const DragableGridView(
     this.dataList, {
-    Key? key,
+    super.key,
     this.scrollDirection = Axis.vertical,
     this.crossAxisCount = 3,
     this.childAspectRatio = 1.0,
     this.dragCompletion,
     required this.itemBuilder,
     required this.canAccept,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() => _DragableGridViewState<T>();

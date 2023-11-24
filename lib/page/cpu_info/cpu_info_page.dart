@@ -6,10 +6,10 @@ import 'package:platform/platform.dart';
 
 class CpuInfoPage extends StatefulWidget implements Pluggable {
   const CpuInfoPage({
-    Key? key,
+    super.key,
     this.child,
     this.platform = const LocalPlatform(),
-  }) : super(key: key);
+  });
 
   final Platform platform;
 

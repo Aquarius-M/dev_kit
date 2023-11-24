@@ -5,7 +5,7 @@ import 'memory_service.dart';
 import 'icon.dart' as icon;
 
 class MemoryInfoPage extends StatelessWidget implements Pluggable {
-  const MemoryInfoPage({Key? key}) : super(key: key);
+  const MemoryInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _DetailModel {
 }
 
 class _MemoryWidget extends StatefulWidget {
-  const _MemoryWidget({Key? key}) : super(key: key);
+  const _MemoryWidget();
 
   @override
   _MemoryWidgetState createState() => _MemoryWidgetState();
@@ -177,14 +177,13 @@ typedef _DropState = void Function(int, bool);
 
 class _DropButton extends StatefulWidget {
   const _DropButton({
-    Key? key,
     this.showArrow = false,
     // ignore: unused_element
     this.descending = true,
     required this.title,
     this.index = 0,
     this.stateChanged,
-  }) : super(key: key);
+  });
 
   final bool showArrow;
   final bool descending;
@@ -224,7 +223,7 @@ class __DropButtonState extends State<_DropButton> {
 }
 
 class _PerRow extends StatelessWidget {
-  const _PerRow({Key? key, this.widgets, this.customColor, this.darkColor = false}) : super(key: key);
+  const _PerRow({this.widgets, this.customColor, this.darkColor = false});
 
   final List<Widget>? widgets;
   final bool darkColor;
@@ -242,10 +241,9 @@ class _PerRow extends StatelessWidget {
 
 class _MemoryDetail extends StatefulWidget {
   const _MemoryDetail({
-    Key? key,
     required this.detail,
     required this.service,
-  }) : super(key: key);
+  });
 
   final _DetailModel detail;
 

@@ -8,7 +8,7 @@ import '../core/store_manager.dart';
 import 'dragable_widget.dart';
 
 class MenuPage extends StatefulWidget {
-  const MenuPage({Key? key, this.action, this.minimalAction, this.closeAction}) : super(key: key);
+  const MenuPage({super.key, this.action, this.minimalAction, this.closeAction});
 
   final MenuAction? action;
   final MinimalAction? minimalAction;
@@ -162,7 +162,7 @@ class _EmptyPlaceholder extends StatelessWidget {
 }
 
 class _MenuCell extends StatelessWidget {
-  const _MenuCell({Key? key, this.pluginData}) : super(key: key);
+  const _MenuCell({this.pluginData});
 
   final Pluggable? pluginData;
 

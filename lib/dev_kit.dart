@@ -27,11 +27,11 @@ class DevKit extends StatefulWidget {
   final bool enable;
   final List<Pluggable>? pluginsList;
   const DevKit({
-    Key? key,
+    super.key,
     this.pluginsList,
     required this.child,
     this.enable = true,
-  }) : super(key: key);
+  });
 
   @override
   State<DevKit> createState() => _DevKitState();

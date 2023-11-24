@@ -11,7 +11,7 @@ import 'icon.dart' as icon;
 import 'package:flutter/rendering.dart';
 
 class WidgetInfoInspector extends StatefulWidget implements Pluggable {
-  const WidgetInfoInspector({Key? key}) : super(key: key);
+  const WidgetInfoInspector({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -108,7 +108,7 @@ class _WidgetInfoInspectorState extends State<WidgetInfoInspector> with WidgetsB
 }
 
 class _DebugPaintButton extends StatefulWidget {
-  const _DebugPaintButton({Key? key}) : super(key: key);
+  const _DebugPaintButton();
 
   @override
   State<StatefulWidget> createState() => _DebugPaintButtonState();

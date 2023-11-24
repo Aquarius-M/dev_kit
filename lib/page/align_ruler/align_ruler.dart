@@ -7,7 +7,7 @@ import '../../utils/constants.dart';
 import 'icon.dart' as icon;
 
 class AlignRuler extends StatefulWidget implements Pluggable {
-  const AlignRuler({Key? key}) : super(key: key);
+  const AlignRuler({super.key});
 
   @override
   // ignore: library_private_types_in_public_api

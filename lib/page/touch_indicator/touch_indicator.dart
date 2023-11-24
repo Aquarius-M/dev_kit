@@ -4,11 +4,10 @@ import '../../core/pluggable.dart';
 import 'icon.dart' as icon;
 
 class TouchIndicator extends StatelessWidget implements PluggableWithNestedWidget {
-  const TouchIndicator({Key? key}) : super(key: key);
+  const TouchIndicator({super.key});
 
   @override
   Widget buildWidget(BuildContext? context) => this;
-
 
   @override
   int get index => 0;
