@@ -127,6 +127,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
                     : DragableGridView(
                         _dataList,
                         childAspectRatio: 0.85,
+                        crossAxisCount: 3,
                         canAccept: (oldIndex, newIndex) {
                           return true;
                         },
@@ -182,7 +183,16 @@ class _MenuCell extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[SizedBox(height: 40, width: 40, child: IconCache.icon(pluggableInfo: pluginData!)), Container(margin: const EdgeInsets.only(top: 25), child: Text(pluginData!.displayName, style: const TextStyle(fontSize: 15, color: Colors.black)))],
+                children: <Widget>[
+                  SizedBox(height: 40, width: 40, child: IconCache.icon(pluggableInfo: pluginData!)),
+                  Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: Text(
+                      pluginData!.displayName,
+                      style: const TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

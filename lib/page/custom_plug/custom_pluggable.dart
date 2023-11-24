@@ -25,7 +25,7 @@ class CustomPluggable implements PluggableWithAnywhereDoor {
   ImageProvider<Object> get iconImageProvider => MemoryImage(base64Decode(icon.iconData));
 
   @override
-  int get index => 999;
+  int get index => 9999;
 
   @override
   String get name => 'ToDetail';

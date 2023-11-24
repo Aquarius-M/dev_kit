@@ -50,7 +50,10 @@ class _DragableGridViewState<T> extends State<DragableGridView> {
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.zero,
         itemCount: dataList!.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 0.85),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: widget.crossAxisCount,
+          childAspectRatio: widget.childAspectRatio,
+        ),
         itemBuilder: ((ctx, index) {
           return _buildDraggable(ctx, index);
         }));

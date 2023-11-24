@@ -27,3 +27,22 @@ const Color kTipTextColor = Color(0xFFFFFFFF);
 final double ratio = bindingAmbiguate(WidgetsBinding.instance)!.window.devicePixelRatio;
 
 final Size windowSize = bindingAmbiguate(WidgetsBinding.instance)!.window.physicalSize / ratio;
+
+final ThemeData devThemeData = ThemeData(
+  useMaterial3: false,
+  primaryColor: Colors.white,
+  appBarTheme: const AppBarTheme(
+    color: Colors.white,
+    elevation: 0.0,
+    foregroundColor: Color(0xff000000),
+    iconTheme: IconThemeData(
+      color: Color(0xff000000),
+    ),
+    centerTitle: true,
+    titleTextStyle: TextStyle(
+      fontSize: 18,
+      color: Color(0xff000000),
+    ),
+  ),
+  canvasColor: Colors.white,
+);

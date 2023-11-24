@@ -1,6 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:dev_kit/page/app_info_plug/app_info_pluggable.dart';
+import 'package:dev_kit/page/applog_plug/applog_pluggable.dart';
 import 'package:dev_kit/page/cpu_info/cpu_info_page.dart';
+import 'package:dev_kit/page/database_plug/database_pluggable.dart';
 import 'package:flutter/material.dart';
 
 import 'core/pluggable_message_service.dart';
@@ -59,6 +62,11 @@ class _DevKitState extends State<DevKit> {
   );
 
   List<Pluggable> commonPluginsList = [
+    const AppInfoPluggable(),
+    const ApplogPluggable(),
+    const DatabasePluggable(),
+    const WidgetInfoInspector(),
+    const WidgetInfoInspector(),
     const WidgetInfoInspector(),
     const WidgetDetailInspector(),
     const ColorSucker(),
