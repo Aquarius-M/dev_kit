@@ -21,7 +21,7 @@ dependencies:
   platform:
   system_info2:
   device_info_plus:
-
+  string_scanner:
 dev_dependencies:
   flutter_test:
     sdk: flutter

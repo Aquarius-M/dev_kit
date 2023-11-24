@@ -104,7 +104,7 @@ class _ContentPageState extends State<ContentPage> {
   void _handleAction(BuildContext? context, Pluggable data) {
     _currentWidget = data.buildWidget(context);
     setState(() {
-      // _showedMenu = false;
+      _showedMenu = false;
     });
   }
 

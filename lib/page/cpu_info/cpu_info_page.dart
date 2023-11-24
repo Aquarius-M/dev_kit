@@ -47,21 +47,23 @@ class _CpuInfoPageState extends State<CpuInfoPage> {
       return Container(
         color: Colors.white,
         child: const Center(
-          child: Text('Only available on Android device'),
+          child: Text('仅支持Android设备'),
         ),
       );
     }
     return Container(
       color: Colors.white,
       child: SafeArea(
-          bottom: false,
-          child: ListView.separated(
-              itemBuilder: (ctx, index) => ListTile(
-                    title: Text(_deviceInfo[index].keys.first),
-                    trailing: Text(_deviceInfo[index].values.first),
-                  ),
-              separatorBuilder: (ctx, index) => const Divider(),
-              itemCount: _deviceInfo.length)),
+        bottom: false,
+        child: ListView.separated(
+          itemBuilder: (ctx, index) => ListTile(
+            title: Text(_deviceInfo[index].keys.first),
+            trailing: Text(_deviceInfo[index].values.first),
+          ),
+          separatorBuilder: (ctx, index) => const Divider(),
+          itemCount: _deviceInfo.length,
+        ),
+      ),
     );
   }
 
