@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:system_info/system_info.dart';
+import 'package:system_info2/system_info2.dart';
 import '../../core/pluggable.dart';
 import 'icon.dart' as icon;
 import 'package:platform/platform.dart';
@@ -21,7 +21,6 @@ class CpuInfoPage extends StatefulWidget implements Pluggable {
 
   @override
   Widget buildWidget(BuildContext? context) => this;
-
 
   @override
   int get index => 3;
@@ -77,7 +76,7 @@ class _CpuInfoPageState extends State<CpuInfoPage> {
     const int MEGABYTE = 1024 * 1024;
     final deviceInfo = <Map<String, String>>[];
     deviceInfo.addAll([
-      {'Kernel architecture': SysInfo.kernelArchitecture},
+      {'Kernel architecture': SysInfo.kernelArchitecture.name},
       {'Kernel bitness': '${SysInfo.kernelBitness}'},
       {'Kernel name': SysInfo.kernelName},
       {'Kernel version': SysInfo.kernelVersion},
@@ -94,7 +93,7 @@ class _CpuInfoPageState extends State<CpuInfoPage> {
       {'Virtual memory size': '${SysInfo.getVirtualMemorySize() ~/ MEGABYTE} MB'},
     ]);
 
-    final processors = SysInfo.processors;
+    final processors = SysInfo.cores;
     deviceInfo.add(
       {'Number of processors': '${processors.length}'},
     );

@@ -19,13 +19,13 @@ dependencies:
   touch_indicator:
   vm_service:
   platform:
-  system_info:
-  device_info:
+  system_info2:
+  device_info_plus:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints:
 
 flutter:
   
