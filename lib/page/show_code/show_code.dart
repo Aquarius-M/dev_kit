@@ -88,17 +88,18 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
 
   Widget _infoView() {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text("页面代码", style: TextStyle(fontSize: 20, height: 1.5)),
           const Text.rich(
-            TextSpan(children: [
-              TextSpan(
-                text: "当前路径（点击以编辑，支持部分匹配）：",
-              ),
-            ], style: TextStyle(height: 2)),
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: "当前路径（点击以编辑，支持部分匹配）：",
+                ),
+              ],
+            ),
           ),
           Row(
             children: <Widget>[
@@ -204,6 +205,9 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("页面代码"),
+      ),
       body: Container(
         color: Colors.white,
         child: SafeArea(
@@ -211,7 +215,6 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
             children: <Widget>[
               _infoView(),
               Expanded(
-                flex: 1,
                 child: _codeView(),
               )
             ],
