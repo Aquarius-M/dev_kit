@@ -227,6 +227,7 @@ class _ContentPageState extends State<ContentPage> {
     return Image(
       height: 30,
       width: 30,
+      gaplessPlayback: true,
       image: MemoryImage(
         base64Decode(icon.iconData),
       ),
