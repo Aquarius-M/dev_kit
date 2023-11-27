@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../core/store_manager.dart';
@@ -6,6 +8,7 @@ import '../core/plugin_manager.dart';
 import '../utils/constants.dart';
 import 'menu_page.dart';
 import 'toolbar_widget.dart';
+import 'icon.dart' as icon;
 
 final GlobalKey contentPageKey = GlobalKey();
 
@@ -19,7 +22,7 @@ class ContentPage extends StatefulWidget {
 
 class _ContentPageState extends State<ContentPage> {
   final PluginStoreManager _storeManager = PluginStoreManager();
-  Size _windowSize = windowSize;
+  final Size _windowSize = windowSize;
   Widget? _currentWidget;
   double _dx = 0;
   double _dy = 0;
@@ -38,6 +41,9 @@ class _ContentPageState extends State<ContentPage> {
     super.initState();
     _storeManager.fetchFloatingDotPos().then((value) {
       if (value == null || value.split(',').length != 2) {
+        _dx = _windowSize.width - dotSize.width / 2 - margin * 4;
+        _dy = _windowSize.height - dotSize.height * 2 - bottomDistance;
+        setState(() {});
         return;
       }
       final x = double.parse(value.split(',').first);
@@ -49,8 +55,6 @@ class _ContentPageState extends State<ContentPage> {
       _dy = y;
       setState(() {});
     });
-    _dx = _windowSize.width - dotSize.width - margin * 4;
-    _dy = _windowSize.height - dotSize.height - bottomDistance;
     _currentWidget = emptyWidget;
 
     itemTapAction(pluginData) async {
@@ -168,9 +172,7 @@ class _ContentPageState extends State<ContentPage> {
   Widget build(BuildContext context) {
     buildContext = context;
     if (_windowSize.isEmpty) {
-      _dx = MediaQuery.of(context).size.width - dotSize.width - margin * 4;
-      _dy = MediaQuery.of(context).size.height - dotSize.height - bottomDistance;
-      _windowSize = MediaQuery.of(context).size;
+      return const SizedBox();
     }
     return SizedBox(
       width: _windowSize.width,
@@ -222,6 +224,12 @@ class _ContentPageState extends State<ContentPage> {
         child: Image(image: _currentSelected!.iconImageProvider),
       );
     }
-    return const FlutterLogo(size: 35);
+    return Image(
+      height: 30,
+      width: 30,
+      image: MemoryImage(
+        base64Decode(icon.iconData),
+      ),
+    );
   }
 }

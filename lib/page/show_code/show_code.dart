@@ -18,16 +18,16 @@ class ShowCode extends StatefulWidget implements Pluggable {
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
-  String get name => 'ShowCode';
+  String get name => '代码查看';
 
   @override
-  String get displayName => 'ShowCode';
+  String get displayName => '代码查看';
 
   @override
   void onTrigger() {}
 
   @override
-  int get index => 99;
+  int get index => 11;
 }
 
 class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
