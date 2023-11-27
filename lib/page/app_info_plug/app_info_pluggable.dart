@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:base_utils/app_info/view.dart';
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
-import '../../utils/constants.dart';
 import 'icon.dart' as icon;
 
 class AppInfoPluggable extends StatefulWidget implements Pluggable {
@@ -33,9 +32,6 @@ class AppInfoPluggable extends StatefulWidget implements Pluggable {
 class _ApplnfoPluggableState extends State<AppInfoPluggable> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: devThemeData,
-      home: const AppInfoPage(),
-    );
+    return const AppInfoPage();
   }
 }

@@ -17,10 +17,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.white),
-      home: const _DetailPage(),
-    );
+    return const _DetailPage();
   }
 
   @override

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../core/pluggable.dart';
-import '../../utils/constants.dart';
 import 'memory_service.dart';
 import 'icon.dart' as icon;
 
@@ -9,10 +8,7 @@ class MemoryInfoPage extends StatelessWidget implements Pluggable {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: devThemeData,
-      home: const _MemoryWidget(),
-    );
+    return const _MemoryWidget();
   }
 
   @override

@@ -5,6 +5,7 @@ import 'package:dev_kit/page/applog_plug/applog_pluggable.dart';
 import 'package:dev_kit/page/cpu_info/cpu_info_page.dart';
 import 'package:dev_kit/page/database_plug/database_pluggable.dart';
 import 'package:dev_kit/page/show_code/show_code.dart';
+import 'package:dev_kit/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'core/pluggable_message_service.dart';
@@ -199,5 +200,9 @@ class _DevKitState extends State<DevKit> {
   }
 
   @override
-  Widget build(BuildContext context) => _child;
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: devThemeData,
+        home: _child,
+      );
 }

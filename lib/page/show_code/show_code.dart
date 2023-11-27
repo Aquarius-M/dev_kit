@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../core/pluggable.dart';
-import '../../utils/constants.dart';
 import 'icon.dart' as icon;
 import 'page_info_helper.dart';
 import 'syntax_highlighter.dart';
@@ -162,11 +161,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                     ),
                   ),
                   controller: textEditingController,
-                  style: const TextStyle(
-                    color: Colors.teal,
-                    fontSize: 14,
-                    height: 1.5
-                  ),
+                  style: const TextStyle(color: Colors.teal, fontSize: 14, height: 1.5),
                   maxLines: 5,
                   minLines: 1,
                   // decoration: null,
@@ -208,24 +203,21 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: devThemeData,
-        home: Scaffold(
-          body: Container(
-            color: Colors.white,
-            child: SafeArea(
-              child: Column(
-                children: <Widget>[
-                  _infoView(),
-                  const Divider(),
-                  Expanded(
-                    flex: 1,
-                    child: _codeView(),
-                  )
-                ],
-              ),
-            ),
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              _infoView(),
+              Expanded(
+                flex: 1,
+                child: _codeView(),
+              )
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
