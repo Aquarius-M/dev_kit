@@ -20,18 +20,30 @@ import 'page/widget_detail_inspector/widget_detail_inspector.dart';
 import 'page/widget_info_inspector/widget_info_inspector.dart';
 import 'ui/devkit_content.dart';
 import 'utils/binding_ambiguate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();
+
+const defaultLocalizationsDelegates = [
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+];
 
 class DevKit extends StatefulWidget {
   final Widget child;
   final bool enable;
   final List<Pluggable>? pluginsList;
+  final Iterable<Locale>? supportedLocales;
+  final Iterable<LocalizationsDelegate> localizationsDelegates;
+
   const DevKit({
     super.key,
     this.pluginsList,
     required this.child,
     this.enable = true,
+    this.supportedLocales,
+    this.localizationsDelegates = defaultLocalizationsDelegates,
   });
 
   @override
@@ -134,7 +146,7 @@ class _DevKitState extends State<DevKit> {
     final nestedWidgets = PluginManager.instance.pluginsMap.values.where((value) {
       return value != null && value is PluggableWithNestedWidget;
     }).toList();
-    Widget layoutChild = _buildLayout(widget.child);
+    Widget layoutChild = _buildLayout(widget.child, widget.supportedLocales, widget.localizationsDelegates);
     for (var item in nestedWidgets) {
       if (item!.name != PluginManager.instance.activatedPluggableName) {
         continue;
@@ -170,13 +182,17 @@ class _DevKitState extends State<DevKit> {
     });
   }
 
-  Stack _buildLayout(Widget child) {
+  Stack _buildLayout(Widget child, Iterable<Locale>? supportedLocales, Iterable<LocalizationsDelegate> delegates) {
     return Stack(
       children: <Widget>[
         RepaintBoundary(key: rootKey, child: child),
         MediaQuery(
           data: MediaQueryData.fromView(bindingAmbiguate(WidgetsBinding.instance)!.platformDispatcher.implicitView!),
-          child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
+          child: Localizations(
+            locale: supportedLocales?.first ?? const Locale('en', 'US'),
+            delegates: delegates.toList(),
+            child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
+          ),
         ),
       ],
     );

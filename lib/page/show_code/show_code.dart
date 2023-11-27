@@ -68,7 +68,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SelectableText.rich(
-            enableInteractiveSelection: false,
+            // enableInteractiveSelection: false,
             TextSpan(
               style: const TextStyle(
                 fontFamily: 'monospace',
@@ -107,7 +107,7 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "请输入路径",
-                    border: InputBorder.none,
+                    border: const UnderlineInputBorder(),
                     prefixIcon: isSearching
                         ? const Column(
                             mainAxisSize: MainAxisSize.min,
@@ -155,16 +155,18 @@ class ShowCodeState extends State<ShowCode> with WidgetsBindingObserver {
                                     .values
                                     .toList(),
                               )
-                            : const SizedBox(),
+                            : const Icon(Icons.arrow_drop_down),
                     suffixIcon: IconButton(
                       onPressed: () => textEditingController!.clear(),
                       icon: const Icon(Icons.clear),
                     ),
-                    enabledBorder: const OutlineInputBorder(),
-                    focusedBorder: const OutlineInputBorder(),
                   ),
                   controller: textEditingController,
-                  style: const TextStyle(color: Colors.teal, fontSize: 14),
+                  style: const TextStyle(
+                    color: Colors.teal,
+                    fontSize: 14,
+                    height: 1.5
+                  ),
                   maxLines: 5,
                   minLines: 1,
                   // decoration: null,
