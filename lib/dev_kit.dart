@@ -189,11 +189,7 @@ class _DevKitState extends State<DevKit> {
         RepaintBoundary(key: rootKey, child: child),
         MediaQuery(
           data: MediaQueryData.fromView(bindingAmbiguate(WidgetsBinding.instance)!.platformDispatcher.implicitView!),
-          child: Localizations(
-            locale: supportedLocales?.first ?? const Locale('en', 'US'),
-            delegates: delegates.toList(),
-            child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
-          ),
+          child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
         ),
       ],
     );
@@ -203,6 +199,8 @@ class _DevKitState extends State<DevKit> {
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: devThemeData,
+        locale: widget.supportedLocales?.first ?? const Locale('en', 'US'),
+        localizationsDelegates: widget.localizationsDelegates,
         home: _child,
       );
 }

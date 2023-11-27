@@ -122,7 +122,14 @@ class _SearchInputState extends State<SearchBar> {
         });
         _inputChangeHandle('');
       },
-      child: Container(margin: const EdgeInsets.only(left: 16.0), child: Image.memory(icon.iconBytes, width: 16, height: 16)),
+      child: Container(
+        margin: const EdgeInsets.only(left: 16.0),
+        child: const Icon(
+          Icons.close,
+          size: 16,
+          color: Colors.black54,
+        ),
+      ),
     );
   }
 
