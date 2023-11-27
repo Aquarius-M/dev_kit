@@ -9,6 +9,7 @@ import 'package:flutter/material.dart' hide SearchBar;
 import '../../core/inspector_overlay.dart';
 import '../../ui/hit_test.dart';
 import '../../utils/binding_ambiguate.dart';
+import '../../utils/constants.dart';
 import 'search_bar.dart' as search_bar;
 import 'icon.dart' as icon;
 
@@ -17,7 +18,11 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
 
   @override
   Widget build(BuildContext context) {
-    return const _DetailPage();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: devThemeData,
+      home: const _DetailPage(),
+    );
   }
 
   @override

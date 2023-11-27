@@ -181,36 +181,38 @@ class _ContentPageState extends State<ContentPage> {
         alignment: Alignment.center,
         children: <Widget>[
           _currentWidget!,
-          Positioned(
-            left: _dx,
-            top: _dy,
-            child: GestureDetector(
-              onTap: onTap,
-              onVerticalDragEnd: dragEnd,
-              onHorizontalDragEnd: dragEnd,
-              onHorizontalDragUpdate: dragEvent,
-              onVerticalDragUpdate: dragEvent,
-              child: Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, 0.0),
-                      blurRadius: 2.0,
-                      spreadRadius: 1.0,
+          _windowSize.isEmpty
+              ? const SizedBox()
+              : Positioned(
+                  left: _dx,
+                  top: _dy,
+                  child: GestureDetector(
+                    onTap: onTap,
+                    onVerticalDragEnd: dragEnd,
+                    onHorizontalDragEnd: dragEnd,
+                    onHorizontalDragUpdate: dragEvent,
+                    onVerticalDragUpdate: dragEvent,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 2.0,
+                            spreadRadius: 1.0,
+                          ),
+                        ],
+                      ),
+                      width: dotSize.width,
+                      height: dotSize.height,
+                      child: Center(
+                        child: _logoWidget(),
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-                width: dotSize.width,
-                height: dotSize.height,
-                child: Center(
-                  child: _logoWidget(),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
