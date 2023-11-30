@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../core/global.dart';
 import '../core/store_manager.dart';
 import '../core/pluggable.dart';
 import '../core/plugin_manager.dart';
-import '../utils/constants.dart';
 import 'menu_page.dart';
 import 'toolbar_widget.dart';
 import 'icon.dart' as icon;

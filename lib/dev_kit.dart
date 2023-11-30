@@ -19,7 +19,6 @@ import 'page/touch_indicator/touch_indicator.dart';
 import 'page/widget_detail_inspector/widget_detail_inspector.dart';
 import 'page/widget_info_inspector/widget_info_inspector.dart';
 import 'ui/devkit_content.dart';
-import 'utils/binding_ambiguate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 final GlobalKey<OverlayState> overlayKey = GlobalKey<OverlayState>();

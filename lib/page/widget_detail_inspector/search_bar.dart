@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../utils/binding_ambiguate.dart';
+import '../../core/global.dart';
 import 'icon.dart' as icon;
 
 typedef OnSubmitHandle = void Function(String text);

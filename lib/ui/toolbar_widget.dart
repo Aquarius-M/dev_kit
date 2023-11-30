@@ -5,13 +5,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../core/global.dart';
 import '../core/pluggable_message_service.dart';
 import '../core/icon_cache.dart';
 import '../core/panel_action_define.dart';
 import '../core/pluggable.dart';
 import '../core/plugin_manager.dart';
 import '../core/store_manager.dart';
-import '../utils/constants.dart';
 
 class ToolBarWidget extends StatefulWidget {
   const ToolBarWidget({super.key, this.action, this.maximalAction, this.closeAction});

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:base_utils/app_info/sqlite/viewer.dart';
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
-import '../../utils/constants.dart';
+import '../../core/global.dart';
 import 'icon.dart' as icon;
 
 class DatabasePluggable extends StatelessWidget implements Pluggable {

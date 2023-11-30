@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../core/global.dart';
 import '../../core/pluggable.dart';
-import '../../utils/constants.dart';
 import 'memory_service.dart';
 import 'icon.dart' as icon;
 

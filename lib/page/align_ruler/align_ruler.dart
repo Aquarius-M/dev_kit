@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../core/global.dart';
 import '../../core/inspector_overlay.dart';
 import '../../core/pluggable.dart';
 import '../../ui/hit_test.dart';
-import '../../utils/constants.dart';
 import 'icon.dart' as icon;
 
 class AlignRuler extends StatefulWidget implements Pluggable {

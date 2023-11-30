@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 
-import '../utils/constants.dart';
+import 'global.dart';
 
 class InspectorOverlay extends LeafRenderObjectWidget {
   const InspectorOverlay({super.key, required this.selection, this.needEdges = true, this.needDescription = true});
