@@ -159,7 +159,7 @@ class __InfoPageState extends State<_InfoPage> {
               preferredSize: const Size.fromHeight(44),
               child: AppBar(
                 elevation: 0.0,
-                title: const Text("widget_detail"),
+                title: const Text("Widget详情"),
               ),
             ),
           );
