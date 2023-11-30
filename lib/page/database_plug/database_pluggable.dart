@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:base_utils/app_info/sqlite/viewer.dart';
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
-import '../../core/global.dart';
 import 'icon.dart' as icon;
 
 class DatabasePluggable extends StatelessWidget implements Pluggable {
@@ -11,11 +10,7 @@ class DatabasePluggable extends StatelessWidget implements Pluggable {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: devThemeData,
-      home: const SqliteViewPage(),
-    );
+    return const SqliteViewPage();
   }
 
   @override
