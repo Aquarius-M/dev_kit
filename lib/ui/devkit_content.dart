@@ -48,7 +48,8 @@ class _ContentPageState extends State<ContentPage> {
       }
       final x = double.parse(value.split(',').first);
       final y = double.parse(value.split(',').last);
-      if (MediaQuery.of(context).size.height - dotSize.height < y || MediaQuery.of(context).size.width - dotSize.width < x) {
+      if (MediaQuery.of(context).size.height - dotSize.height < y ||
+          MediaQuery.of(context).size.width - dotSize.width < x) {
         return;
       }
       _dx = x;
@@ -61,7 +62,9 @@ class _ContentPageState extends State<ContentPage> {
       if (pluginData is PluggableWithAnywhereDoor) {
         dynamic result;
         if (pluginData.routeNameAndArgs != null) {
-          result = await pluginData.navigator?.pushNamed(pluginData.routeNameAndArgs!.item1, arguments: pluginData.routeNameAndArgs!.item2);
+          result = await pluginData.navigator?.pushNamed(
+              pluginData.routeNameAndArgs!.item1,
+              arguments: pluginData.routeNameAndArgs!.item2);
         } else if (pluginData.route != null) {
           result = await pluginData.navigator?.push(pluginData.route!);
         }
@@ -137,7 +140,9 @@ class _ContentPageState extends State<ContentPage> {
 
   void _updatePanelWidget() {
     setState(() {
-      _currentWidget = _showedMenu ? (minimalContent ? _toolbarWidget : _menuPage) : emptyWidget;
+      _currentWidget = _showedMenu
+          ? (minimalContent ? _toolbarWidget : _menuPage)
+          : emptyWidget;
     });
   }
 
@@ -223,7 +228,10 @@ class _ContentPageState extends State<ContentPage> {
       return SizedBox(
         height: 30,
         width: 30,
-        child: Image(image: _currentSelected!.iconImageProvider),
+        child: Image(
+          gaplessPlayback: true,
+          image: _currentSelected!.iconImageProvider,
+        ),
       );
     }
     return Image(
