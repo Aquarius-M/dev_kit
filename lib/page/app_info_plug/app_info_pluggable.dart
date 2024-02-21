@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:base_utils/app_info/view.dart';
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
+import 'app_info_page.dart';
 import 'icon.dart' as icon;
 
 class AppInfoPluggable extends StatefulWidget implements Pluggable {
@@ -12,7 +12,8 @@ class AppInfoPluggable extends StatefulWidget implements Pluggable {
   Widget? buildWidget(BuildContext? context) => this;
 
   @override
-  ImageProvider<Object> get iconImageProvider => MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider =>
+      MemoryImage(base64Decode(icon.iconData));
 
   @override
   String get name => '应用信息';

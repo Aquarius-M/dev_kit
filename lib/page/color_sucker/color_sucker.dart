@@ -2,9 +2,10 @@
 
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:base_utils/string_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image/image.dart' as img;
 import '../../core/global.dart';
 import '../../core/pluggable.dart';
@@ -204,10 +205,14 @@ class _ColorSuckerState extends State<ColorSucker> {
           left: 0,
           top: _toolBarY,
           child: GestureDetector(
-            onTap: () {
-              StringUtils.copy("#${_currentColor.value.toRadixString(16).substring(2)}");
-            },
-              onVerticalDragUpdate: _toolBarPanUpdate, child: toolBar),
+              onTap: () {
+                Clipboard.setData(ClipboardData(
+                    text:
+                        "#${_currentColor.value.toRadixString(16).substring(2)}"));
+                Fluttertoast.showToast(msg: "已复制");
+              },
+              onVerticalDragUpdate: _toolBarPanUpdate,
+              child: toolBar),
         ),
         Positioned(
           left: _magnifierPosition.dx,

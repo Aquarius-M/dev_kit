@@ -13,8 +13,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   tuple:
-  base_utils:
-    path: ../base_utils
+  # base_utils:
+  #   path: ../base_utils
     # git:
     #   url: https://github.com/Aquarius-M/base_utils.git
   shared_preferences:
@@ -24,6 +24,13 @@ dependencies:
   system_info2:
   device_info_plus:
   string_scanner:
+  sqlite_viewer:
+  fluttertoast:
+  path:
+  path_provider:
+
+  network_info_plus:
+  package_info_plus:
 
 dev_dependencies:
   flutter_test:

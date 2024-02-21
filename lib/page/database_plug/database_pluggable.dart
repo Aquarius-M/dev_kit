@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:base_utils/app_info/sqlite/viewer.dart';
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
+import 'package:sqlite_viewer/sqlite_viewer.dart';
 import 'icon.dart' as icon;
 
 class DatabasePluggable extends StatelessWidget implements Pluggable {
@@ -29,6 +29,6 @@ class DatabasePluggable extends StatelessWidget implements Pluggable {
 
   @override
   Widget build(BuildContext context) {
-    return const SqliteViewPage();
+    return const DatabaseList();
   }
 }
