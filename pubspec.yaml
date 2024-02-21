@@ -24,7 +24,6 @@ dependencies:
   system_info2:
   device_info_plus:
   string_scanner:
-  vm_service:
 
 dev_dependencies:
   flutter_test:

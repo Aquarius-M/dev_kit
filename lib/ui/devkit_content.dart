@@ -134,6 +134,9 @@ class _ContentPageState extends State<ContentPage> {
     if (minimalContent) {
       _currentWidget = _toolbarWidget;
       _showedMenu = true;
+    } else {
+      _currentWidget = _menuPage;
+      _showedMenu = true;
     }
     setState(() {});
   }

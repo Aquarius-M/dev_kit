@@ -2,9 +2,8 @@
 
 import 'package:dev_kit/page/app_info_plug/app_info_pluggable.dart';
 import 'package:dev_kit/page/applog_plug/applog_pluggable.dart';
-import 'package:dev_kit/page/cpu_info/cpu_info_page.dart';
 import 'package:dev_kit/page/database_plug/database_pluggable.dart';
-import 'package:dev_kit/page/show_code/show_code.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'core/pluggable_message_service.dart';
@@ -14,8 +13,6 @@ import 'core/plugin_manager.dart';
 import 'page/align_ruler/align_ruler.dart';
 import 'page/color_sucker/color_sucker.dart';
 import 'page/device_info/device_info_panel.dart';
-import 'page/memory_info/memory_info_page.dart';
-import 'page/touch_indicator/touch_indicator.dart';
 import 'page/widget_detail_inspector/widget_detail_inspector.dart';
 import 'page/widget_info_inspector/widget_info_inspector.dart';
 import 'ui/devkit_content.dart';
@@ -74,18 +71,14 @@ class _DevKitState extends State<DevKit> {
   );
 
   List<Pluggable> commonPluginsList = [
-    const AppInfoPluggable(),
     const ApplogPluggable(),
+    const AppInfoPluggable(),
+    const DeviceInfoPanel(),
     const DatabasePluggable(),
-    const WidgetInfoInspector(),
-    const WidgetDetailInspector(),
+    if (kDebugMode) const WidgetInfoInspector(),
+    if (kDebugMode) const WidgetDetailInspector(),
     const ColorSucker(),
     const AlignRuler(),
-    const TouchIndicator(),
-    const MemoryInfoPage(),
-    const CpuInfoPage(),
-    const DeviceInfoPanel(),
-    const ShowCode(),
   ];
 
   @override
@@ -96,7 +89,8 @@ class _DevKitState extends State<DevKit> {
     super.initState();
     _replaceChild();
     _injectOverlay();
-    _onMetricsChanged = bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged;
+    _onMetricsChanged =
+        bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged;
     bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = () {
       if (_onMetricsChanged != null) {
         _onMetricsChanged!();
@@ -109,7 +103,9 @@ class _DevKitState extends State<DevKit> {
   @override
   void didUpdateWidget(DevKit oldWidget) {
     super.didUpdateWidget(oldWidget);
-    widget.enable ? PluggableMessageService().resetListener() : PluggableMessageService().clearListener();
+    widget.enable
+        ? PluggableMessageService().resetListener()
+        : PluggableMessageService().clearListener();
     if (widget.enable != oldWidget.enable && widget.enable) {
       _injectOverlay();
     }
@@ -124,7 +120,8 @@ class _DevKitState extends State<DevKit> {
   @override
   void dispose() {
     if (_onMetricsChanged != null) {
-      bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged = _onMetricsChanged;
+      bindingAmbiguate(WidgetsBinding.instance)!.window.onMetricsChanged =
+          _onMetricsChanged;
     }
     super.dispose();
     // Do the cleaning at last.
@@ -140,10 +137,12 @@ class _DevKitState extends State<DevKit> {
   }
 
   void _replaceChild() {
-    final nestedWidgets = PluginManager.instance.pluginsMap.values.where((value) {
+    final nestedWidgets =
+        PluginManager.instance.pluginsMap.values.where((value) {
       return value != null && value is PluggableWithNestedWidget;
     }).toList();
-    Widget layoutChild = _buildLayout(widget.child, widget.supportedLocales, widget.localizationsDelegates);
+    Widget layoutChild = _buildLayout(
+        widget.child, widget.supportedLocales, widget.localizationsDelegates);
     for (var item in nestedWidgets) {
       if (item!.name != PluginManager.instance.activatedPluggableName) {
         continue;
@@ -153,7 +152,8 @@ class _DevKitState extends State<DevKit> {
         break;
       }
     }
-    _child = Directionality(textDirection: TextDirection.ltr, child: layoutChild);
+    _child =
+        Directionality(textDirection: TextDirection.ltr, child: layoutChild);
   }
 
   void _injectOverlay() {
@@ -179,12 +179,16 @@ class _DevKitState extends State<DevKit> {
     });
   }
 
-  Stack _buildLayout(Widget child, Iterable<Locale>? supportedLocales, Iterable<LocalizationsDelegate> delegates) {
+  Stack _buildLayout(Widget child, Iterable<Locale>? supportedLocales,
+      Iterable<LocalizationsDelegate> delegates) {
     return Stack(
       children: <Widget>[
         RepaintBoundary(key: rootKey, child: child),
         MediaQuery(
-          data: MediaQueryData.fromView(bindingAmbiguate(WidgetsBinding.instance)!.platformDispatcher.implicitView!),
+          data: MediaQueryData.fromView(
+              bindingAmbiguate(WidgetsBinding.instance)!
+                  .platformDispatcher
+                  .implicitView!),
           child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
         ),
       ],
@@ -196,7 +200,9 @@ class _DevKitState extends State<DevKit> {
         debugShowCheckedModeBanner: false,
         theme: devThemeData,
         locale: widget.supportedLocales?.first ?? const Locale('zh', 'CN'),
-        supportedLocales: [widget.supportedLocales?.first ?? const Locale('zh', 'CN')],
+        supportedLocales: [
+          widget.supportedLocales?.first ?? const Locale('zh', 'CN')
+        ],
         localizationsDelegates: widget.localizationsDelegates,
         home: _child,
       );

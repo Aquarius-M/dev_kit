@@ -26,7 +26,7 @@ class ApplogPluggable extends StatelessWidget implements Pluggable {
   String get name => '日志信息';
 
   @override
-  int get index => 9;
+  int get index => 7;
   @override
   void onTrigger() {}
 }

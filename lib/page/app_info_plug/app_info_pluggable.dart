@@ -21,7 +21,7 @@ class AppInfoPluggable extends StatefulWidget implements Pluggable {
   String get displayName => '应用信息';
 
   @override
-  int get index => 10;
+  int get index => 6;
   @override
   void onTrigger() {}
 

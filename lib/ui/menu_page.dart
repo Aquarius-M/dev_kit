@@ -8,7 +8,8 @@ import '../core/store_manager.dart';
 import 'dragable_widget.dart';
 
 class MenuPage extends StatefulWidget {
-  const MenuPage({super.key, this.action, this.minimalAction, this.closeAction});
+  const MenuPage(
+      {super.key, this.action, this.minimalAction, this.closeAction});
 
   final MenuAction? action;
   final MinimalAction? minimalAction;
@@ -19,14 +20,20 @@ class MenuPage extends StatefulWidget {
   _MenuPageState createState() => _MenuPageState();
 }
 
-class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin {
+class _MenuPageState extends State<MenuPage>
+    with SingleTickerProviderStateMixin {
   final PluginStoreManager _storeManager = PluginStoreManager();
 
   List<Pluggable?> _dataList = [];
 
+  bool isload = false;
+
   @override
   void initState() {
     super.initState();
+    setState(() {
+      isload = true;
+    });
     _handleData();
   }
 
@@ -50,6 +57,7 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
     }
     _saveData(dataList);
     setState(() {
+      isload = false;
       _dataList = dataList;
     });
   }
@@ -122,29 +130,36 @@ class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin
               ),
             ),
             Expanded(
-                child: _dataList.isEmpty
-                    ? _EmptyPlaceholder()
-                    : DragableGridView(
-                        _dataList,
-                        childAspectRatio: 0.85,
-                        crossAxisCount: 3,
-                        canAccept: (oldIndex, newIndex) {
-                          return true;
-                        },
-                        dragCompletion: (dataList) {
-                          _saveData(dataList as List<Pluggable?>);
-                        },
-                        itemBuilder: (context, dynamic data) {
-                          return GestureDetector(
-                            onTap: () {
-                              widget.action!(data);
-                              PluggableMessageService().resetCounter(data);
-                            },
-                            behavior: HitTestBehavior.opaque,
-                            child: _MenuCell(pluginData: data),
-                          );
-                        },
-                      ))
+              child: isload == false
+                  ? _dataList.isEmpty
+                      ? _EmptyPlaceholder()
+                      : DragableGridView(
+                          _dataList,
+                          childAspectRatio: 0.85,
+                          crossAxisCount: 3,
+                          canAccept: (oldIndex, newIndex) {
+                            return true;
+                          },
+                          dragCompletion: (dataList) {
+                            _saveData(dataList as List<Pluggable?>);
+                          },
+                          itemBuilder: (context, dynamic data) {
+                            return GestureDetector(
+                              onTap: () {
+                                widget.action!(data);
+                                PluggableMessageService().resetCounter(data);
+                              },
+                              behavior: HitTestBehavior.opaque,
+                              child: _MenuCell(pluginData: data),
+                            );
+                          },
+                        )
+                  : const Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+            )
           ],
         ),
       ),
@@ -175,16 +190,43 @@ class _MenuCell extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
-            Positioned(left: 0, top: 0, child: Container(height: constraints.maxHeight, width: 0.5, color: lineColor)),
-            Positioned(left: 0, top: 0, child: Container(height: 0.5, width: constraints.maxWidth, color: lineColor)),
-            Positioned(top: 0, right: 0, child: Container(height: constraints.maxHeight, width: 0.5, color: lineColor)),
-            Positioned(bottom: 0, left: 0, child: Container(height: 0.5, width: constraints.maxWidth, color: lineColor)),
+            Positioned(
+                left: 0,
+                top: 0,
+                child: Container(
+                    height: constraints.maxHeight,
+                    width: 0.5,
+                    color: lineColor)),
+            Positioned(
+                left: 0,
+                top: 0,
+                child: Container(
+                    height: 0.5,
+                    width: constraints.maxWidth,
+                    color: lineColor)),
+            Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                    height: constraints.maxHeight,
+                    width: 0.5,
+                    color: lineColor)),
+            Positioned(
+                bottom: 0,
+                left: 0,
+                child: Container(
+                    height: 0.5,
+                    width: constraints.maxWidth,
+                    color: lineColor)),
             Container(
               alignment: Alignment.center,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SizedBox(height: 40, width: 40, child: IconCache.icon(pluggableInfo: pluginData!)),
+                  SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: IconCache.icon(pluggableInfo: pluginData!)),
                   Container(
                     margin: const EdgeInsets.only(top: 15),
                     child: Text(

@@ -31,7 +31,7 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   ImageProvider<Object> get iconImageProvider => MemoryImage(icon.iconBytes);
 
   @override
-  int get index => 6;
+  int get index => 2;
 
   @override
   String get name => '组件详情';

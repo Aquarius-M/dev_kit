@@ -20,7 +20,7 @@ class WidgetInfoInspector extends StatefulWidget implements Pluggable {
   Widget buildWidget(BuildContext? context) => this;
 
   @override
-  int get index => 7;
+  int get index => 3;
 
   @override
   String get name => '组件信息';
