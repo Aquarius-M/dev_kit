@@ -9,18 +9,14 @@ class DatabasePluggable extends StatelessWidget implements Pluggable {
   const DatabasePluggable({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const SqliteViewPage();
-  }
-
-  @override
   Widget? buildWidget(BuildContext? context) => this;
 
   @override
   String get displayName => '数据库';
 
   @override
-  ImageProvider<Object> get iconImageProvider => MemoryImage(base64Decode(icon.iconData));
+  ImageProvider<Object> get iconImageProvider =>
+      MemoryImage(base64Decode(icon.iconData));
 
   @override
   String get name => '数据库';
@@ -30,4 +26,9 @@ class DatabasePluggable extends StatelessWidget implements Pluggable {
 
   @override
   void onTrigger() {}
+
+  @override
+  Widget build(BuildContext context) {
+    return const SqliteViewPage();
+  }
 }

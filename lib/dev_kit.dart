@@ -5,6 +5,7 @@ import 'package:dev_kit/page/applog_plug/applog_pluggable.dart';
 import 'package:dev_kit/page/database_plug/database_pluggable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'core/pluggable_message_service.dart';
 import 'core/global.dart';
@@ -189,7 +190,9 @@ class _DevKitState extends State<DevKit> {
               bindingAmbiguate(WidgetsBinding.instance)!
                   .platformDispatcher
                   .implicitView!),
-          child: ScaffoldMessenger(child: Overlay(key: overlayKey)),
+          child: ScaffoldMessenger(
+            child: Overlay(key: overlayKey),
+          ),
         ),
       ],
     );
@@ -204,6 +207,26 @@ class _DevKitState extends State<DevKit> {
           widget.supportedLocales?.first ?? const Locale('zh', 'CN')
         ],
         localizationsDelegates: widget.localizationsDelegates,
+        builder: (context, child) {
+          return MediaQuery(
+            ///设置文字大小不随系统设置改变
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: const TextScaler.linear(1.0)),
+            child: GestureDetector(
+              onTap: () {
+                /// 隐藏键盘
+                SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+                ///设置点击空白取消焦点
+                FocusScopeNode focus = FocusScope.of(context);
+                if (!focus.hasPrimaryFocus && focus.focusedChild != null) {
+                  FocusManager.instance.primaryFocus!.unfocus();
+                }
+              },
+              child: child,
+            ),
+          );
+        },
         home: _child,
       );
 }

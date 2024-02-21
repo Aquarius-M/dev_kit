@@ -16,15 +16,6 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
   const WidgetDetailInspector({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: devThemeData,
-      home: const _DetailPage(),
-    );
-  }
-
-  @override
   Widget buildWidget(BuildContext? context) => this;
 
   @override
@@ -41,6 +32,11 @@ class WidgetDetailInspector extends StatelessWidget implements Pluggable {
 
   @override
   void onTrigger() {}
+
+  @override
+  Widget build(BuildContext context) {
+    return const _DetailPage();
+  }
 }
 
 class _DetailPage extends StatefulWidget {
@@ -77,7 +73,8 @@ class _DetailPageState extends State<_DetailPage> with WidgetsBindingObserver {
     }
     Future.delayed(const Duration(milliseconds: 100), () {
       Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-        return _InfoPage(elements: selection.currentElement!.debugGetDiagnosticChain());
+        return _InfoPage(
+            elements: selection.currentElement!.debugGetDiagnosticChain());
       }));
     });
   }
@@ -103,13 +100,18 @@ class _DetailPageState extends State<_DetailPage> with WidgetsBindingObserver {
       ),
     );
     children.add(gesture);
-    children.add(InspectorOverlay(selection: selection, needDescription: false, needEdges: false));
+    children.add(InspectorOverlay(
+        selection: selection, needDescription: false, needEdges: false));
     return Stack(textDirection: TextDirection.ltr, children: children);
   }
 }
 
 class _DetailModel {
-  List<int> colors = [Random().nextInt(256), Random().nextInt(256), Random().nextInt(256)];
+  List<int> colors = [
+    Random().nextInt(256),
+    Random().nextInt(256),
+    Random().nextInt(256)
+  ];
   Element element;
 
   _DetailModel(this.element);
@@ -169,7 +171,9 @@ class __InfoPageState extends State<_InfoPage> {
         margin: const EdgeInsets.only(top: 6, bottom: 6, left: 12, right: 12),
         child: Row(
           children: [
-            Padding(padding: const EdgeInsets.only(right: 12), child: _dot(model.colors)),
+            Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: _dot(model.colors)),
             Expanded(
                 child: Text(
               model.element.widget.toStringShort(),
@@ -202,8 +206,10 @@ class __InfoPageState extends State<_InfoPage> {
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
-              child: search_bar.SearchBar(placeHolder: '请输入要搜索的widget', onChangeHandle: _textChange),
+              padding: const EdgeInsets.only(
+                  left: 12, right: 12, top: 10, bottom: 10),
+              child: search_bar.SearchBar(
+                  placeHolder: '请输入要搜索的widget', onChangeHandle: _textChange),
             ),
             Expanded(
               child: GestureDetector(
@@ -228,9 +234,16 @@ class __InfoPageState extends State<_InfoPage> {
                 title: RichText(
                   text: TextSpan(
                     text: 'widget_build_chain',
-                    style: const TextStyle(color: Colors.black, fontSize: 19, fontWeight: FontWeight.w500, fontFamily: "PingFang SC"),
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "PingFang SC"),
                     children: <TextSpan>[
-                      TextSpan(text: '  depth: ${widget.elements.length}', style: const TextStyle(color: Colors.black, fontSize: 11)),
+                      TextSpan(
+                          text: '  depth: ${widget.elements.length}',
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 11)),
                     ],
                   ),
                 ))));
@@ -266,17 +279,25 @@ class _DetailContent extends StatelessWidget {
         future: getInfo(),
         builder: (_, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
+            return const Center(
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
           } else if (snapshot.connectionState == ConnectionState.done) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _titleWidget("Widget Description"),
-                Container(constraints: const BoxConstraints(maxHeight: 200), padding: const EdgeInsets.only(top: 12, left: 12, right: 12), child: SingleChildScrollView(child: Text(element.widget.toStringDeep()))),
+                Container(
+                    constraints: const BoxConstraints(maxHeight: 200),
+                    padding:
+                        const EdgeInsets.only(top: 12, left: 12, right: 12),
+                    child: SingleChildScrollView(
+                        child: Text(element.widget.toStringDeep()))),
                 _titleWidget("RenderObject Description"),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 12, right: 12, left: 12),
+                    padding:
+                        const EdgeInsets.only(top: 12, right: 12, left: 12),
                     child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         itemBuilder: (_, index) {
