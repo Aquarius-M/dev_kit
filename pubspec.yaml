@@ -15,6 +15,8 @@ dependencies:
   tuple:
   base_utils:
     path: ../base_utils
+    # git:
+    #   url: https://github.com/Aquarius-M/base_utils.git
   shared_preferences:
   image:
   touch_indicator:
@@ -22,6 +24,7 @@ dependencies:
   system_info2:
   device_info_plus:
   string_scanner:
+  vm_service:
 
 dev_dependencies:
   flutter_test:
