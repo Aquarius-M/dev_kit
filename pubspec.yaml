@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  get_server:
+  
   tuple:
   # base_utils:
   #   path: ../base_utils
@@ -28,6 +30,7 @@ dependencies:
   fluttertoast:
   path:
   path_provider:
+  logger:
 
   network_info_plus:
   package_info_plus:

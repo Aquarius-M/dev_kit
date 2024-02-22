@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum ToastTime {
   /// Show Short toast for 1 sec
   LENGTH_SHORT,

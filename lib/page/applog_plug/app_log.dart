@@ -94,6 +94,7 @@ class _LogListPageState extends State<LogListPage> {
         ],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),

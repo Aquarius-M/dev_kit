@@ -1,15 +1,40 @@
 import 'package:dev_kit/dev_kit.dart';
 import 'package:dev_kit/page/custom_plug/custom_pluggable.dart';
+import 'package:dev_kit/utils/app_log_utils.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await logInit();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+Future logInit() async {
+  await KitAppLog.init();
+}
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   // This widget is the root of your application.
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this); // 注册监听器
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DevKit(
@@ -36,7 +61,7 @@ class MyApp extends StatelessWidget {
           // This works for code too, not just values: Most code changes can be
           // tested with just a hot reload.
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+          useMaterial3: false,
         ),
         home: const MyHomePage(title: 'Flutter Demo Home Page'),
       ),
@@ -74,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+    KitAppLog.i(_counter);
   }
 
   @override
