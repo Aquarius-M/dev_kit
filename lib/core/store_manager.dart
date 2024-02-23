@@ -5,6 +5,7 @@ class PluginStoreManager {
   final String _minimalToolbarSwitch = 'MinimalToolbarSwitch';
   final String _floatingDotPos = 'FloatingDotPos';
   final String _customSort = 'CustomSort';
+  final String _scrollOffset = 'ScrollOffset';
 
   final Future<SharedPreferences> _sharedPref = SharedPreferences.getInstance();
 
@@ -49,5 +50,15 @@ class PluginStoreManager {
   Future<bool?> fetchCustomSort() async {
     final SharedPreferences prefs = await _sharedPref;
     return prefs.getBool(_customSort);
+  }
+
+  Future<double?> fetchScrollOffset() async {
+    final SharedPreferences prefs = await _sharedPref;
+    return prefs.getDouble(_scrollOffset);
+  }
+
+  void storeScrollOffset(double value) async {
+    final SharedPreferences prefs = await _sharedPref;
+    await prefs.setDouble(_scrollOffset, value);
   }
 }

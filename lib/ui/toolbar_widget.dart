@@ -232,29 +232,56 @@ class __ToolBarContentState extends State<_ToolBarContent> {
   }
 }
 
-class _PluginScrollContainer extends StatelessWidget {
+class _PluginScrollContainer extends StatefulWidget {
   const _PluginScrollContainer({required this.dataList, this.action});
 
   final List<Pluggable?> dataList;
   final MenuAction? action;
 
   @override
+  State<_PluginScrollContainer> createState() => _PluginScrollContainerState();
+}
+
+class _PluginScrollContainerState extends State<_PluginScrollContainer> {
+  final PluginStoreManager _storeManager = PluginStoreManager();
+
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+
+    _storeManager.fetchScrollOffset().then((value) {
+      if (value != null) {
+        scrollController.jumpTo(value);
+      }
+    });
+    scrollController.addListener(() {
+      _storeManager.storeScrollOffset(scrollController.offset);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: _minimalHeight,
-        width: MediaQuery.of(context).size.width,
-        child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: dataList
-                  .map(
-                    (data) => _MenuCell(
-                      pluginData: data,
-                      action: action,
-                    ),
-                  )
-                  .toList(),
-            )));
+      height: _minimalHeight,
+      width: MediaQuery.of(context).size.width,
+      child: SingleChildScrollView(
+        controller: scrollController,
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: widget.dataList
+              .map(
+                (data) => _MenuCell(
+                  pluginData: data,
+                  action: widget.action,
+                ),
+              )
+              .toList(),
+        ),
+      ),
+    );
   }
 }
 
