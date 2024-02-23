@@ -1,7 +1,9 @@
 name: dev_kit
 description: "A new Flutter project."
 version: 0.0.1
-publish_to: none
+# publish_to: "none"
+homepage: https://github.com/Aquarius-M/dev_kit
+
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -12,28 +14,28 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  get_server:
+  get_server: ^1.2.1
   
-  tuple:
+  tuple: ^2.0.2
   # base_utils:
   #   path: ../base_utils
     # git:
     #   url: https://github.com/Aquarius-M/base_utils.git
-  shared_preferences:
-  image:
-  touch_indicator:
-  platform:
-  system_info2:
-  device_info_plus:
-  string_scanner:
-  sqlite_viewer:
-  fluttertoast:
-  path:
-  path_provider:
-  logger:
+  shared_preferences: ^2.2.2
+  image: ^4.1.7
+  touch_indicator: ^2.0.0
+  platform: ^3.1.4
+  system_info2: ^4.0.0
+  device_info_plus: ^9.1.2
+  string_scanner: ^1.2.0
+  sqlite_viewer: ^1.0.5
+  fluttertoast: ^8.2.4
+  path: ^1.9.0
+  path_provider: ^2.1.2
+  logger: ^2.0.2+1
 
-  network_info_plus:
-  package_info_plus:
+  network_info_plus: ^4.1.0+1
+  package_info_plus: ^4.2.0
 
 dev_dependencies:
   flutter_test:
