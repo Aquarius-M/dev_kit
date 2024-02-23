@@ -28,7 +28,7 @@ class PluginManager {
   /// Register multiple [plugins]
   Future registerAll(List<Pluggable> plugins) async {
     for (final plugin in plugins) {
-      register(plugin);
+      await register(plugin);
     }
   }
 

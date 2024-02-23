@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
-import '../../utils/device_utils.dart';
-import '../../utils/utils.dart';
+import '../../../utils/device_utils.dart';
+import '../../../utils/utils.dart';
 
 /// 应用信息页面
 class AppInfoPage extends StatefulWidget {

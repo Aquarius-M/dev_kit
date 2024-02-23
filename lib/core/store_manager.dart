@@ -4,6 +4,7 @@ class PluginStoreManager {
   final String _pluginStoreKey = 'PluginStoreKey';
   final String _minimalToolbarSwitch = 'MinimalToolbarSwitch';
   final String _floatingDotPos = 'FloatingDotPos';
+  final String _customSort = 'CustomSort';
 
   final Future<SharedPreferences> _sharedPref = SharedPreferences.getInstance();
 
@@ -38,5 +39,15 @@ class PluginStoreManager {
   void storeFloatingDotPos(double x, double y) async {
     final SharedPreferences prefs = await _sharedPref;
     prefs.setString(_floatingDotPos, "$x,$y");
+  }
+
+  void storeCustomSort(bool value) async {
+    final SharedPreferences prefs = await _sharedPref;
+    await prefs.setBool(_customSort, value);
+  }
+
+  Future<bool?> fetchCustomSort() async {
+    final SharedPreferences prefs = await _sharedPref;
+    return prefs.getBool(_customSort);
   }
 }

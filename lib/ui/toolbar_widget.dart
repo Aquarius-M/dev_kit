@@ -14,7 +14,8 @@ import '../core/plugin_manager.dart';
 import '../core/store_manager.dart';
 
 class ToolBarWidget extends StatefulWidget {
-  const ToolBarWidget({super.key, this.action, this.maximalAction, this.closeAction});
+  const ToolBarWidget(
+      {super.key, this.action, this.maximalAction, this.closeAction});
 
   final MenuAction? action;
   final CloseAction? closeAction;
@@ -35,7 +36,8 @@ class _ToolBarWidgetState extends State<ToolBarWidget> {
   @override
   void initState() {
     final bottomPadding = WidgetsBinding.instance.window.padding.bottom / ratio;
-    _maxDy = windowSize.height - _minimalHeight - _dragBarHeight - bottomPadding;
+    _maxDy =
+        windowSize.height - _minimalHeight - _dragBarHeight - bottomPadding;
     _dy = _maxDy;
     super.initState();
   }
@@ -117,7 +119,8 @@ class __ToolBarContentState extends State<_ToolBarContent> {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onVerticalDragUpdate: (details) => _dragCallback(details),
+                        onVerticalDragUpdate: (details) =>
+                            _dragCallback(details),
                         child: Stack(
                           children: [
                             const SizedBox(
@@ -205,8 +208,13 @@ class __ToolBarContentState extends State<_ToolBarContent> {
         }
       }
     }
-    // 按照index越大越前排序
-    dataList.sort((a, b) => b!.index.compareTo(a!.index));
+    // 当没有自定义排序时，按照index越大越前排序
+    _storeManager.fetchCustomSort().then((value) {
+      if (value == true) {
+      } else {
+        dataList.sort((a, b) => b!.index.compareTo(a!.index));
+      }
+    });
     _saveData(dataList);
     setState(() {
       _dataList = dataList;
@@ -282,12 +290,19 @@ class _MenuCell extends StatelessWidget {
                     child: IconCache.icon(pluggableInfo: pluginData!),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(top: 4),
-                      child: Text(
-                        pluginData!.name,
-                        style: const TextStyle(fontSize: 12, color: Colors.black),
-                        maxLines: 1,
-                      ))
+                    margin: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      pluginData!.name,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                      ),
+                      maxLines: 1,
+                      strutStyle: const StrutStyle(
+                        forceStrutHeight: true,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

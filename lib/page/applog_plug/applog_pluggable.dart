@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
-import 'app_log.dart';
+import 'src/app_log_page.dart';
 import 'icon.dart' as icon;
 
 class ApplogPluggable extends StatelessWidget implements Pluggable {
@@ -22,7 +22,7 @@ class ApplogPluggable extends StatelessWidget implements Pluggable {
   String get name => '日志信息';
 
   @override
-  int get index => 7;
+  int get index => 8;
 
   @override
   void onTrigger() {}

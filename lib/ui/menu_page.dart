@@ -55,6 +55,13 @@ class _MenuPageState extends State<MenuPage>
         }
       }
     }
+    // 当没有自定义排序时，按照index越大越前排序
+    _storeManager.fetchCustomSort().then((value) {
+      if (value == true) {
+      } else {
+        dataList.sort((a, b) => b!.index.compareTo(a!.index));
+      }
+    });
     _saveData(dataList);
     setState(() {
       isload = false;
@@ -141,6 +148,7 @@ class _MenuPageState extends State<MenuPage>
                             return true;
                           },
                           dragCompletion: (dataList) {
+                            _storeManager.storeCustomSort(true);
                             _saveData(dataList as List<Pluggable?>);
                           },
                           itemBuilder: (context, dynamic data) {

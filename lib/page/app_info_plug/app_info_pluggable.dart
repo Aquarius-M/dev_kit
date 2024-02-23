@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dev_kit/core/pluggable.dart';
 import 'package:flutter/material.dart';
-import 'app_info_page.dart';
 import 'icon.dart' as icon;
+import 'src/app_info_page.dart';
 
 class AppInfoPluggable extends StatefulWidget implements Pluggable {
   const AppInfoPluggable({super.key});
@@ -22,7 +22,7 @@ class AppInfoPluggable extends StatefulWidget implements Pluggable {
   String get displayName => '应用信息';
 
   @override
-  int get index => 6;
+  int get index => 7;
   @override
   void onTrigger() {}
 

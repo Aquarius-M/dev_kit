@@ -1,8 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:dev_kit/page/app_info_plug/app_info_pluggable.dart';
-import 'package:dev_kit/page/applog_plug/applog_pluggable.dart';
-import 'package:dev_kit/page/database_plug/database_pluggable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +9,11 @@ import 'core/global.dart';
 import 'core/pluggable.dart';
 import 'core/plugin_manager.dart';
 import 'page/align_ruler/align_ruler.dart';
+import 'page/app_info_plug/app_info_pluggable.dart';
+import 'page/applog_plug/applog_pluggable.dart';
+import 'page/channel_monitor/channel_monitor.dart';
 import 'page/color_sucker/color_sucker.dart';
+import 'page/database_plug/database_pluggable.dart';
 import 'page/device_info/device_info_panel.dart';
 import 'page/widget_detail_inspector/widget_detail_inspector.dart';
 import 'page/widget_info_inspector/widget_info_inspector.dart';
@@ -76,6 +77,7 @@ class _DevKitState extends State<DevKit> {
     const AppInfoPluggable(),
     const DeviceInfoPanel(),
     const DatabasePluggable(),
+    ChannelPluggable(),
     if (kDebugMode) const WidgetInfoInspector(),
     if (kDebugMode) const WidgetDetailInspector(),
     const ColorSucker(),
