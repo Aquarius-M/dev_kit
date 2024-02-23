@@ -23,13 +23,13 @@ public class MethodChannel {
     init(messenger: FlutterBinaryMessenger) {
         let channel = FlutterMethodChannel(name: "nian_an/methodChannel", binaryMessenger: messenger)
         channel.setMethodCallHandler { (call:FlutterMethodCall, result:@escaping FlutterResult) in
-            if (call.method == "sendData") {
-                if let dict = call.arguments as? Dictionary<String, Any> {
-                    let name:String = dict["name"] as? String ?? ""
-                    let age:Int = dict["age"] as? Int ?? -1
-                    result(["name":"hello,\(name)","age":age])
-                }
-            }
+            // if (call.method == "sendData") {
+            //     if let dict = call.arguments as? Dictionary<String, Any> {
+            //         let name:String = dict["name"] as? String ?? ""
+            //         let age:Int = dict["age"] as? Int ?? -1
+            //         result(["name":"hello,\(name)","age":age])
+            //     }
+            // }
             result(" yes")
         }
     }
