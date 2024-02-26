@@ -37,4 +37,5 @@ class _ChannelStore {
   }
 }
 
+// ignore: library_private_types_in_public_api
 _ChannelStore channelStore = _ChannelStore();

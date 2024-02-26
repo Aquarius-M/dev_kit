@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Platform.isAndroid
             ? "($_counter)give me debug info"
             : "ios_($_counter) give me debug info");
-    print('test debugString=$debugString');
+    debugPrint('test debugString=$debugString');
   }
 
   void _incrementCounter() {

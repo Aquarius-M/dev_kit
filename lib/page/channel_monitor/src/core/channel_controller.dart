@@ -37,4 +37,5 @@ class _ChannelController {
   }
 }
 
+// ignore: library_private_types_in_public_api
 _ChannelController channelController = _ChannelController();

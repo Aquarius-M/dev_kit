@@ -38,7 +38,7 @@ class DevKitBinaryMessenger extends BinaryMessenger {
     // ui.PlatformDispatcher.instance because the PlatformDispatcher may be
     // dependency injected elsewhere with a different instance. However, static
     // access at this location seems to be the least bad option.
-    // TODO(ianh): Use ServicesBinding.instance once we have better diagnostics
+    // TO (ianh): Use ServicesBinding.instance once we have better diagnostics
     // on that getter.
     ui.PlatformDispatcher.instance.sendPlatformMessage(channel, message,
         (ByteData? reply) {
