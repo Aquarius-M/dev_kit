@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'ume_binary_messenger.dart';
+import 'devkit_binary_messenger.dart';
 
 class ChannelBinding extends WidgetsFlutterBinding {
   static WidgetsBinding? ensureInitialized() {
